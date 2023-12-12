@@ -1,17 +1,20 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useContext } from "react";
+
+import { Context } from "../App";
 
 // Icons
 import { RiBook2Line } from "react-icons/ri";
 import { FiMoon, FiSun } from "react-icons/fi";
 
 type props = {
-    mode: boolean
     setMode: (arg: boolean) => void
     font: string
     setFont: (arg: string) => void
 }
 
-const Navbar = ({ mode, setMode, font, setFont }: props) => {
+const Navbar = ({ setMode, font, setFont }: props) => {
+
+    const { mode } = useContext(Context)
 
     const changeMode = () => {
         localStorage.setItem("mode", `${!mode}`);
@@ -31,9 +34,9 @@ const Navbar = ({ mode, setMode, font, setFont }: props) => {
                 </div>
                 <div className="flex items-center gap-4">
                     <select className="focus:outline-none cursor-pointer bg-transparent" onChange={e => changeFont(e)} value={font}>
-                        <option className={`${mode && "bg-slate-800"} dark:bg-slate-800`} value="serif">Serif</option>
-                        <option className={`${mode && "bg-slate-800"} dark:bg-slate-800`} value="sans">Sans</option>
-                        <option className={`${mode && "bg-slate-800"} dark:bg-slate-800`} value="mono">Mono</option>
+                        <option className={`dark:bg-slate-800 ${mode && "bg-slate-800"} dark:bg-slate-800`} value="serif">Serif</option>
+                        <option className={`dark:bg-slate-800 ${mode && "bg-slate-800"} dark:bg-slate-800`} value="sans">Sans</option>
+                        <option className={`dark:bg-slate-800 ${mode && "bg-slate-800"} dark:bg-slate-800`} value="mono">Mono</option>
                     </select>
 
                     <div className="flex gap-2 items-center">

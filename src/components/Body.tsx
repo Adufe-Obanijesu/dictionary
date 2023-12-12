@@ -1,64 +1,121 @@
+import { useContext, useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners"
 import { FaPlay } from "react-icons/fa";
 
-const Body = ({ mode }: {mode: boolean}) => {
+
+import Main from "./Main";
+
+import { Context } from "../App";
+
+
+const Body = ({ word }: {word: string}) => {
+
+    const { mode } = useContext(Context);
+
+    const [ response, setResponse ] = useState({} as any);
+    const [ error, setError ] = useState(false);
+    const [ loading, setLoading ] = useState(true);
+    const [ audioLoading, setAudioLoading ] = useState(false);
+
+    useEffect(() => {
+        const config = {
+            headers: {
+                "X-RapidAPI-Key": import.meta.env.VITE_DICT_KEY,
+                "Content-Type": "application/json",
+            }
+        }
+        const unsub = async () => {
+            fetch(`https://wordsapiv1.p.rapidapi.com/words/${word}`, config)
+            .then(response => response.json())
+            .then(response => {
+                setResponse(response);
+                setLoading(false);
+                if (response.message && response.message === "word not found") {
+                    setError(true);
+                    return;
+                }
+                setError(false);
+            })
+            .catch(() => {
+                setLoading(false);
+                setError(true);
+            })
+        }
+
+        return () => {
+            unsub();
+        }
+    }, [word]);
+
+
+    const play = () => {
+        setAudioLoading(true);
+
+        const data = {
+            "model": "tts-1-hd",
+            "input": word,
+            "voice": "alloy"
+        }
+
+        const config = {
+            method: "POST",
+            headers : {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${import.meta.env.VITE_OPENAI}`,
+            },
+            body: JSON.stringify(data),
+        }
+
+        fetch("https://api.openai.com/v1/audio/speech", config)
+        .then(async response => {
+            const blob = await response.blob();
+            const blobUrl = URL.createObjectURL(blob);
+
+            const audio = new Audio(blobUrl);
+            audio.play();
+            setAudioLoading(false);
+        })
+        .catch(err => {
+            console.error(err);
+            setAudioLoading(false);
+        });
+    }
+
     return (
         <section>
             <div className="flex justify-between items-center my-6">
                 <div>
                     <h2 className="font-bold text-5xl">
-                        keyboard
+                        {word.toLowerCase()}
                     </h2>
+
+
                     <span className="text-purple-400 mt-2">
-                        key-board
+                        {
+                            (response.pronunciation) && `/${response.pronunciation.all}/`
+                        }
                     </span>
                 </div>
 
                 <div className="relative">
+                    
                     <div className="bg-purple-500 h-10 w-10 mx-2 my-2 rounded-full absolute animate-ping z-0"></div>
-                    <div className="z-10 relative cursor-pointer bg-purple-200 rounded-full w-14 h-14 flex justify-center items-center">
-                        <FaPlay className="text-purple-500 text-lg" />
+                    <div className="z-10 relative cursor-pointer bg-purple-200 rounded-full w-14 h-14 flex justify-center items-center" onClick={play}>
+                        {
+                            audioLoading ? <ClipLoader color="#9f7aea" size={20} /> : <FaPlay className="text-purple-500 text-lg" />
+                        }
+                        
                     </div>
                 </div>
             </div>
 
-            <div className="py-4">
-                <div className="flex items-center">
-                    <span className={`${mode ? "text-slate-200" : "text-slate-600"} font-bold pr-4`}>noun</span>
-                    <div className="h-[.5px] grow bg-slate-200"></div>
-                </div>
+            {
+                (response.message && response.message === "word not found") && <h2 className={`font-bold text-3xl ${!mode && "text-slate-600"}`}>Word not found</h2>
+            }
 
-                <div className="py-4">
-                    <h5 className={`${mode ? "text-slate-300" : "text-slate-500"} py-2`}>Meaning</h5>
-                    <p className={`${mode ? "text-slate-400" : "text-slate-700"}`}>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis velit, labore totam reprehenderit quia aut deserunt nihil officiis nostrum molestiae?
-                    </p>
-                </div>
-
-                <div className="py-2">
-                    <h5 className={`${mode ? "text-slate-300" : "text-slate-500"} py-2`}>Examples</h5>
-                    <ul className="mt-1 list-disc pl-4">
-                        <li className={`${mode ? "text-slate-400" : "text-slate-700"} mb-2`}>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis velit, labore totam reprehenderit quia aut deserunt nihil officiis nostrum molestiae?
-                        </li>
-                        <li className={`${mode ? "text-slate-400" : "text-slate-700"} mb-2`}>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis velit, labore totam reprehenderit quia aut deserunt nihil officiis nostrum molestiae?
-                        </li>
-                        <li className={`${mode ? "text-slate-400" : "text-slate-700"} mb-2`}>
-                            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis velit, labore totam reprehenderit quia aut deserunt nihil officiis nostrum molestiae?
-                        </li>
-                    </ul>
-                </div>
-
-                <div className="py-2">
-                    <div className="flex gap-4 items-center">
-                        <span className={`${mode ? "text-slate-300" : "text-slate-500"} py-2`}>Synonyms</span>
-                        <div className="flex gap-2">
-                            <span className="text-purple-600 font-semibold">electronic keyboard</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {
+                response.results && response.results.map((res: any) => <Main key={res.definition} definition={res} />)
+            }
             
 
         </section>
