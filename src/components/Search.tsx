@@ -27,8 +27,10 @@ const Search = ({ setWord }: { setWord: React.Dispatch<React.SetStateAction<stri
         .then(response => response.json())
         .then(response => {
             setResponse(response);
+            alert(JSON.stringify(response));
         })
-        .catch(() => {
+        .catch((err: any) => {
+            alert(err)
         });
     }, 500, { trailing: true, leading: true });
 
