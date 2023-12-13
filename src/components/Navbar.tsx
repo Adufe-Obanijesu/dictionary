@@ -1,15 +1,15 @@
-import { ChangeEvent, useContext } from "react";
+import React, { ChangeEvent, useContext } from "react";
 
-import { Context } from "../App";
+import { Context } from "../contexts/Mode";
 
 // Icons
 import { RiBook2Line } from "react-icons/ri";
 import { FiMoon, FiSun } from "react-icons/fi";
 
 type props = {
-    setMode: (arg: boolean) => void
+    setMode: React.Dispatch<React.SetStateAction<boolean>>
     font: string
-    setFont: (arg: string) => void
+    setFont: React.Dispatch<React.SetStateAction<string>>
 }
 
 const Navbar = ({ setMode, font, setFont }: props) => {

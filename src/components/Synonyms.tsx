@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Context } from "../App";
+import { Context } from "../contexts/Mode";
 
 const Synonyms = ({ synonyms }: { synonyms: any }) => {
 

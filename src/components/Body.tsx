@@ -5,7 +5,7 @@ import { FaPlay } from "react-icons/fa";
 
 import Main from "./Main";
 
-import { Context } from "../App";
+import { Context } from "../contexts/Mode";
 
 
 const Body = ({ word }: {word: string}) => {
@@ -13,7 +13,6 @@ const Body = ({ word }: {word: string}) => {
     const { mode } = useContext(Context);
 
     const [ response, setResponse ] = useState({} as any);
-    const [ error, setError ] = useState(false);
     const [ loading, setLoading ] = useState(true);
     const [ audioLoading, setAudioLoading ] = useState(false);
 
@@ -31,20 +30,15 @@ const Body = ({ word }: {word: string}) => {
                 setResponse(response);
                 setLoading(false);
                 if (response.message && response.message === "word not found") {
-                    setError(true);
                     return;
                 }
-                setError(false);
             })
             .catch(() => {
                 setLoading(false);
-                setError(true);
             })
         }
 
-        return () => {
-            unsub();
-        }
+        unsub();
     }, [word]);
 
 
@@ -85,7 +79,7 @@ const Body = ({ word }: {word: string}) => {
         <section>
             <div className="flex justify-between items-center my-6">
                 <div>
-                    <h2 className="font-bold text-5xl">
+                    <h2 className="font-bold lg:text-5xl md:text-4xl text-2xl">
                         {word.toLowerCase()}
                     </h2>
 
