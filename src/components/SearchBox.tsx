@@ -21,7 +21,7 @@ const SearchBox = ({ response, setWord, setSearch }: props) => {
     )
 
     return (
-        <div className="bg-white w-full rounded-md absolute top-12 z-20 left-0">
+        <div className="bg-white w-full rounded-md absolute top-12 z-20 left-0 min-h-[100px]">
 
             {
                 response && response.results.data.map((word: string) => (
