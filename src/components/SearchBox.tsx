@@ -22,6 +22,7 @@ const SearchBox = ({ response, setWord, setSearch }: props) => {
 
     return (
         <div className="bg-white w-full rounded-md absolute top-12 z-20 left-0">
+    
             {
                 response && response.results.data.map((word: string) => (
                     <p key={word} className="text-slate-600 border-b py-4 px-4 cursor-pointer transitionItem hover:bg-slate-200" onClick={() => updateSearch(word)}>
