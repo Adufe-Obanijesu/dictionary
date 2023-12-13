@@ -13,7 +13,6 @@ const Body = ({ word }: {word: string}) => {
     const { mode } = useContext(Context);
 
     const [ response, setResponse ] = useState({} as any);
-    const [ loading, setLoading ] = useState(true);
     const [ audioLoading, setAudioLoading ] = useState(false);
 
     useEffect(() => {
@@ -28,13 +27,11 @@ const Body = ({ word }: {word: string}) => {
             .then(response => response.json())
             .then(response => {
                 setResponse(response);
-                setLoading(false);
                 if (response.message && response.message === "word not found") {
                     return;
                 }
             })
             .catch(() => {
-                setLoading(false);
             })
         }
 
