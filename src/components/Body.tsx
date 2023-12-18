@@ -4,6 +4,7 @@ import Main from "./Main";
 
 import { Context } from "../contexts/Mode";
 import AudioComponent from "./AudioComponent";
+import Skeleton from "./Skeleton";
 
 
 const Body = ({ word }: {word: string}) => {
@@ -11,8 +12,11 @@ const Body = ({ word }: {word: string}) => {
     const { mode } = useContext(Context);
 
     const [ response, setResponse ] = useState([] as any);
+    const [ loading, setLoading ] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
+
         const config = {
             headers: {
                 "X-RapidAPI-Key": import.meta.env.VITE_DICT_KEY,
@@ -27,8 +31,17 @@ const Body = ({ word }: {word: string}) => {
                 if (response.message && response.message === "word not found") {
                     return;
                 }
+
+                if (!localStorage.getItem("lastWord")) {
+                    localStorage.setItem("lastWord", word);
+                } else {
+                    localStorage.setItem("lastWord", word);
+                }
             })
             .catch(() => {
+            })
+            .finally(() => {
+                setLoading(false);
             })
         }
 
@@ -38,6 +51,7 @@ const Body = ({ word }: {word: string}) => {
 
     return (
         <section>
+            
             <div className="flex justify-between items-center my-6">
                 <div>
                     <h2 className="font-bold lg:text-5xl md:text-4xl text-2xl">
@@ -55,14 +69,22 @@ const Body = ({ word }: {word: string}) => {
                 <AudioComponent word={word} />
 
             </div>
-
+            
             {
-                (response.message && response.message === "word not found") && <h2 className={`font-bold text-3xl ${!mode && "text-slate-600"}`}>Word not found</h2>
+                loading ? <Skeleton /> : (
+                    <>
+                        {
+                            (response.message && response.message === "word not found") && <h2 className={`font-bold text-3xl ${!mode && "text-slate-600"}`}>Word not found</h2>
+                        }
+
+                        {
+                            response.results && response.results.map((res: any) => <Main key={res.definition} definition={res} />)
+                        }
+                    </>
+                )
             }
 
-            {
-                response.results && response.results.map((res: any) => <Main key={res.definition} definition={res} />)
-            }
+            
             
 
         </section>

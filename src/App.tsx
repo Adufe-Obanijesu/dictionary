@@ -13,7 +13,7 @@ const App = () => {
   const [ font, setFont ] = useState("sans");
 
   // Word state
-  const [ word, setWord ] = useState("dictionary");
+  const [ word, setWord ] = useState(localStorage.getItem("lastWord") || "dictionary");
 
   useEffect(() => {
     if (!localStorage.getItem("mode")) {
