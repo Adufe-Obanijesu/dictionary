@@ -40,12 +40,17 @@ const Navbar = ({ setMode, font, setFont }: props) => {
                     </select>
 
                     <div className="flex gap-2 items-center">
-                        <div className="bg-gray-700 p-1 rounded-full w-10 h-6 flex items-center cursor-pointer" onClick={changeMode}>
-                            <div className={`h-4 w-4 bg-slate-50 rounded-full transition ease-in duration-100 ${mode && "translate-x-4"}`}></div>
+                        <button className="bg-gray-700 p-1 rounded-full w-10 h-6 flex items-center cursor-pointer dark:hidden" onClick={changeMode}>
+                            <div className={`h-4 w-4 bg-slate-50 rounded-full transition ease-in duration-100 ${mode && "translate-x-4"} dark:translate-x-4`}></div>
+                        </button>
+                        <FiMoon className="text-slate-300 cursor-pointer text-xl hidden dark:block" />
+
+                        <div className="hidden dark:block">
+                            Device is in dark mode
                         </div>
 
                         {
-                            !mode ? <FiSun className="text-slate-600 cursor-pointer text-xl" onClick={changeMode} /> : <FiMoon className="text-slate-300 cursor-pointer text-xl" onClick={changeMode} />
+                            !mode ? <FiSun className="text-slate-600 cursor-pointer text-xl dark:hidden" onClick={changeMode} /> : <FiMoon className="text-slate-300 cursor-pointer text-xl dark:hidden" onClick={changeMode} />
                         }
                     </div>
 
