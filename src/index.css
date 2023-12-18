@@ -8,9 +8,6 @@
 
 button {
     @apply cursor-pointer;
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-      
 }
 
 h-center {
