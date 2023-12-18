@@ -5,9 +5,19 @@ import { FaPlay } from "react-icons/fa";
 const AudioComponent = ({ word }: { word: string }) => {
 
     const [ audioLoading, setAudioLoading ] = useState(false);
+    const [ blob, setBlob ] = useState("");
+    const [ prev, setPrev ] = useState("");
 
     const play = () => {
         setAudioLoading(true);
+
+        if (prev === word) {
+            const audio = new Audio(blob);
+            audio.play();
+            setAudioLoading(false);
+
+            return
+        }
 
         const data = {
             "model": "tts-1-hd",
@@ -28,10 +38,12 @@ const AudioComponent = ({ word }: { word: string }) => {
         .then(async response => {
             const blob = await response.blob();
             const blobUrl = URL.createObjectURL(blob);
+            setBlob(blobUrl);
 
             const audio = new Audio(blobUrl);
             audio.play();
             setAudioLoading(false);
+            setPrev(word);
         })
         .catch(err => {
             console.error(err);

@@ -60,9 +60,9 @@ const Body = ({ word }: {word: string}) => {
 
 
                     <span className="text-purple-400 mt-2">
-                        {
+                        /{
                             response.message === "word not found" || response.length === 0 ? "" : response.pronunciation.all || response.pronunciation
-                        }
+                        }/
                     </span>
                 </div>
 
