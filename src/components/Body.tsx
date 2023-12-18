@@ -1,19 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import { ClipLoader } from "react-spinners"
-import { FaPlay } from "react-icons/fa";
-
 
 import Main from "./Main";
 
 import { Context } from "../contexts/Mode";
+import AudioComponent from "./AudioComponent";
 
 
 const Body = ({ word }: {word: string}) => {
 
     const { mode } = useContext(Context);
 
-    const [ response, setResponse ] = useState({} as any);
-    const [ audioLoading, setAudioLoading ] = useState(false);
+    const [ response, setResponse ] = useState([] as any);
 
     useEffect(() => {
         const config = {
@@ -39,39 +36,6 @@ const Body = ({ word }: {word: string}) => {
     }, [word]);
 
 
-    const play = () => {
-        setAudioLoading(true);
-
-        const data = {
-            "model": "tts-1-hd",
-            "input": word,
-            "voice": "alloy"
-        }
-
-        const config = {
-            method: "POST",
-            headers : {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${import.meta.env.VITE_OPENAI}`,
-            },
-            body: JSON.stringify(data),
-        }
-
-        fetch("https://api.openai.com/v1/audio/speech", config)
-        .then(async response => {
-            const blob = await response.blob();
-            const blobUrl = URL.createObjectURL(blob);
-
-            const audio = new Audio(blobUrl);
-            audio.play();
-            setAudioLoading(false);
-        })
-        .catch(err => {
-            console.error(err);
-            setAudioLoading(false);
-        });
-    }
-
     return (
         <section>
             <div className="flex justify-between items-center my-6">
@@ -83,21 +47,13 @@ const Body = ({ word }: {word: string}) => {
 
                     <span className="text-purple-400 mt-2">
                         {
-                            (response.pronunciation) && `/${response.pronunciation.all}/`
+                            response.message === "word not found" || response.length === 0 ? "" : response.pronunciation.all || response.pronunciation
                         }
                     </span>
                 </div>
 
-                <div className="relative">
-                    
-                    <div className="bg-purple-500 h-10 w-10 mx-2 my-2 rounded-full absolute animate-ping z-0"></div>
-                    <button className="z-10 relative bg-purple-200 rounded-full w-14 h-14 flex justify-center items-center" onClick={play} disabled={audioLoading || false}>
-                        {
-                            audioLoading ? <ClipLoader color="#9f7aea" size={20} /> : <FaPlay className="text-purple-500 text-lg" />
-                        }
-                        
-                    </button>
-                </div>
+                <AudioComponent word={word} />
+
             </div>
 
             {
