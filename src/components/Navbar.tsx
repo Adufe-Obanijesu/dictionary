@@ -45,7 +45,7 @@ const Navbar = ({ setMode, font, setFont }: props) => {
                         </div>
 
                         {
-                            mode ? <FiSun className="text-slate-300 cursor-pointer text-xl" onClick={changeMode} /> : <FiMoon className="text-slate-600 cursor-pointer text-xl" onClick={changeMode} />
+                            !mode ? <FiSun className="text-slate-600 cursor-pointer text-xl" onClick={changeMode} /> : <FiMoon className="text-slate-300 cursor-pointer text-xl" onClick={changeMode} />
                         }
                     </div>
 

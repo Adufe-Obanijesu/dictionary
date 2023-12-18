@@ -23,7 +23,7 @@ const Search = ({ setWord }: { setWord: React.Dispatch<React.SetStateAction<stri
             }
         }
 
-        fetch(`https://wordsapiv1.p.rapidapi.com/words/?letterPattern=%5E${value}\\w*&limit=7`, config)
+        fetch(`https://wordsapiv1.p.rapidapi.com/words/?letterPattern=^${value.toLowerCase()}&limit=7`, config)
         .then(response => response.json())
         .then(response => {
             setResponse(response);
