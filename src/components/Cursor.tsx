@@ -22,7 +22,7 @@ const Cursor = () => {
   return (
       <div
       style={{ left: `calc(${position.x}px - 12rem)`, top: `calc(${position.y}px - 12rem)` }}
-      className={`absolute hidden md:flex transitionItem z-0 blur-3xl rounded-full h-96 w-96 ${mode ? "bg-slate-600/10" : "bg-slate-300/10"}`}
+      className={`absolute hidden md:block transitionItem z-0 blur-3xl rounded-full h-96 w-96 ${mode ? "bg-slate-600/10" : "bg-slate-300/10"}`}
       ></div>
   )
 }
