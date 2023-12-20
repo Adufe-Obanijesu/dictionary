@@ -47,6 +47,14 @@ const Body = ({ word }: {word: string}) => {
 
         unsub();
     }, [word]);
+    
+    const testPronunciation = (response: any) => {
+        if (response.message === "word not found") return false;
+        if (response.length === 0) return false;
+        if (Object.keys(response.pronunciation).length === 0) return false;
+
+        return true;
+    }
 
 
     return (
@@ -61,7 +69,7 @@ const Body = ({ word }: {word: string}) => {
 
                     <span className="text-purple-400 mt-2">
                         /{
-                            response.message === "word not found" || response.length === 0 ? "" : response.pronunciation.all || response.pronunciation
+                            testPronunciation(response) ? response.pronunciation.all || response.pronunciation : ""
                         }/
                     </span>
                 </div>

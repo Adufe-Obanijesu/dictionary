@@ -42,7 +42,7 @@ const App = () => {
       mode,
       setMode,
     }}>
-      <main className={`overflow-hidden relative flex justify-center py-4 min-h-screen transitionItem dark:bg-slate-900 dark:text-slate-300 ${mode && "bg-slate-900 text-slate-300"} ${font === "sans" && "font-sans"} ${font === "serif" && "font-serif"} ${font === "mono" && "font-mono"}`}>
+      <main className={`overflow-hidden relative flex justify-center py-4 min-h-screen transitionItem dark:bg-slate-900 dark:text-slate-300 ${mode && "bg-slate-900 text-slate-300"} ${font === "sans" && "font-sans"} ${font === "serif" && "font-serif"} ${font === "mono" && "font-mono"} ${font === "quicksand" && "font-quicksand"} ${font === "playfair" && "font-playfair"}`}>
         
         <Cursor />
         

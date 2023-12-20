@@ -11,7 +11,7 @@ const Main = ({ definition }: {definition: any}) => {
         <div className="py-4">
                 <div className="flex items-center">
                     <span className={`dark:text-slate-200 ${mode ? "text-slate-200" : "text-slate-600"} font-bold pr-4`}>
-                        {definition.partOfSpeech}
+                        {definition?.partOfSpeech}
                     </span>
                     <div className="h-[.5px] grow bg-slate-200"></div>
                 </div>
@@ -19,7 +19,7 @@ const Main = ({ definition }: {definition: any}) => {
                 <div className="py-4">
                     <h5 className={`dark:text-slate-300 ${mode ? "text-slate-300" : "text-slate-500"} py-2`}>Meaning</h5>
                     <p className={`dark:text-slate-400 ${mode ? "text-slate-400" : "text-slate-700"}`}>
-                        {definition.definition}
+                        {definition?.definition}
                     </p>
                 </div>
 

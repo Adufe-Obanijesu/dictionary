@@ -34,9 +34,11 @@ const Navbar = ({ setMode, font, setFont }: props) => {
                 </div>
                 <div className="flex items-center gap-4">
                     <select className="focus:outline-none cursor-pointer bg-transparent" onChange={e => changeFont(e)} value={font}>
+                        <option className={`dark:bg-slate-800 ${mode && "bg-slate-800"} dark:bg-slate-800`} value="quicksand">Quicksand</option>
                         <option className={`dark:bg-slate-800 ${mode && "bg-slate-800"} dark:bg-slate-800`} value="serif">Serif</option>
                         <option className={`dark:bg-slate-800 ${mode && "bg-slate-800"} dark:bg-slate-800`} value="sans">Sans</option>
                         <option className={`dark:bg-slate-800 ${mode && "bg-slate-800"} dark:bg-slate-800`} value="mono">Mono</option>
+                        <option className={`dark:bg-slate-800 ${mode && "bg-slate-800"} dark:bg-slate-800`} value="playfair">Playfair</option>
                     </select>
 
                     <div className="flex gap-2 items-center">
