@@ -48,7 +48,7 @@ const Navbar = ({ setMode, font, setFont }: props) => {
                         <FiMoon className="text-slate-300 cursor-pointer text-xl hidden dark:block" />
 
                         <div className="hidden dark:block">
-                            Device is in dark mode
+                            Device in dark mode
                         </div>
 
                         {

@@ -88,6 +88,10 @@ const Body = ({ word }: {word: string}) => {
                         {
                             response.results && response.results.map((res: any) => <Main key={res.definition} definition={res} />)
                         }
+
+                        {
+                            (!response.message && !response.results) && <h2 className={`font-bold text-3xl ${!mode && "text-slate-600"}`}>No definition available now</h2>
+                        }
                     </>
                 )
             }

@@ -39,7 +39,6 @@ const AudioComponent = ({ word }: { word: string }) => {
             const blob = await response.blob();
             const blobUrl = URL.createObjectURL(blob);
             setBlob(blobUrl);
-
             const audio = new Audio(blobUrl);
             audio.play();
             setAudioLoading(false);
