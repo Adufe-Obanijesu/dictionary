@@ -18,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     if (!localStorage.getItem("mode")) {
-      localStorage.setItem("mode", "false");
+      localStorage.setItem("mode", "true");
     }
 
     if (!localStorage.getItem("font")) {
@@ -29,6 +29,8 @@ const App = () => {
 
     if (mode === "true") {
       setMode(true);
+    } else {
+      setMode(false);
     }
 
     if (font) {
