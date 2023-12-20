@@ -27,7 +27,7 @@ const Navbar = ({ setMode, font, setFont }: props) => {
     }
 
     return (
-        <nav>
+        <nav className="z-10 relative">
             <div className="flex justify-between items-center py-2">
                 <div>
                     <RiBook2Line className="text-gray-400 text-4xl" />

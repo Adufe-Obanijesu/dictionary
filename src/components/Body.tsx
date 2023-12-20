@@ -51,6 +51,7 @@ const Body = ({ word }: {word: string}) => {
     const testPronunciation = (response: any) => {
         if (response.message === "word not found") return false;
         if (response.length === 0) return false;
+        if (!response.pronunciation) return false;
         if (Object.keys(response.pronunciation).length === 0) return false;
 
         return true;
@@ -58,7 +59,7 @@ const Body = ({ word }: {word: string}) => {
 
 
     return (
-        <section>
+        <section className="relative">
             
             <div className="flex justify-between items-center my-6">
                 <div>

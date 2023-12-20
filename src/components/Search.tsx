@@ -48,7 +48,7 @@ const Search = ({ setWord }: { setWord: React.Dispatch<React.SetStateAction<stri
     }
 
     return (
-        <div className="relative">
+        <div className="relative z-10">
             <form onSubmit={updateSearch} className={`mt-4 transitionItem py-2 px-4 rounded-lg dark:bg-slate-700 ${mode ? "bg-slate-700" : "bg-slate-100"}`}>
                 <div className="flex gap-4 items-center">
                     <input type="text" className="grow bg-transparent focus:outline-none" placeholder="Enter your word" value={search} onChange={e => searchWord(e.target.value)} autoFocus />
