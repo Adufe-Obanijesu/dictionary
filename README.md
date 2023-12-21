@@ -1,30 +1,67 @@
-# React + TypeScript + Vite
+# Dictionary Web App 📚✨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Dictionary Web App, a beautifully crafted tool that makes exploring words a delightful experience. This project draws design inspiration from [Frontend Mentor](https://www.frontendmentor.io/challenges/dictionary-web-app-h5wwnyuKFL).
 
-Currently, two official plugins are available:
+![Demo Image](/public/dict_video.gif)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features 🌟
 
-## Expanding the ESLint configuration
+- **Sleek Design**: Enjoy a visually appealing and intuitive dictionary interface that enhances your user experience.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Customizable Modes**: Switch effortlessly between light and dark modes to suit your preferences and create a comfortable reading environment.
 
-- Configure the top-level `parserOptions` property like this:
+- **Font Variety**: Personalize your reading experience with a selection of fonts including Quicksand, Serif, Sans, Mono, and Playfair.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- **Text-to-Speech Pronunciation**: Utilize the power of OpenAI to convert text to speech, enhancing your understanding and pronunciation of words.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **User Preferences**: The app remembers your preferences using browser localStorage, providing a seamless and personalized experience across sessions.
+
+- **Optimized Search**: The use of debounce ensures optimized search functionality, enhancing performance and responsiveness.
+
+
+## Live Demo 🚀
+
+Check out the live demo [here](https://phenomenal-duckanoo-637e8f.netlify.app/).
+
+## Getting Started 🛠️
+
+This project was built using cutting-edge technologies:
+
+- [Vite](https://vitejs.dev/guide/) for faster development.
+- [React.JS](https://react.dev/learn/installation) for building dynamic user interfaces.
+- [TailwindCSS](https://tailwindcss.com/) for a utility-first CSS framework.
+
+## Third-Party APIs 🌐
+
+Third-party APIs were leveraged to enhance the functionality of the app:
+
+- [WordsAPI](https://rapidapi.com/dpventures/api/wordsapi)
+- [OpenAI Text to Speech](https://platform.openai.com/docs/guides/text-to-speech)
+
+## Installation Process 🚧
+
+To get started with the project, follow these simple steps:
+
+1. Clone the repository to your local machine.
+
+   ```bash
+   https://github.com/Adufe-Obanijesu/dictionary.git
+
+2. Install the necessary dependencies.
+
+  ```bash
+    npm install
+    # or
+    yarn install
+  ```
+
+3. Run the app in development mode.
+
+  ```bash
+    npm run dev
+    # or
+    yarn run dev
+
+  ```
+
+You are now ready to explore the world of words with this Dictionary Web App! 🚀📖
