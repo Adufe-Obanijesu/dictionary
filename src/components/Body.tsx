@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import Main from "./Main";
 
 import { Context } from "../contexts/Mode";
-import AudioComponent from "./AudioComponent";
+// import AudioComponent from "./AudioComponent";
 import Skeleton from "./Skeleton";
 
 
