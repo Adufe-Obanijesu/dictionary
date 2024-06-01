@@ -75,7 +75,7 @@ const Body = ({ word }: {word: string}) => {
                     </span>
                 </div>
 
-                <AudioComponent word={word} />
+                {/* <AudioComponent word={word} /> */}
 
             </div>
             
